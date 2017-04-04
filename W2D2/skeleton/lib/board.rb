@@ -36,9 +36,9 @@ class Board
     until current_stones.zero?
       if current_pos == 13
         current_pos = 0
-      elsif current_pos == 12 && current_player_name == @player1
+      elsif current_pos == 12 && current_player_name == @name1
         current_pos = 0
-      elsif current_pos == 5 && current_player_name == @player2
+      elsif current_pos == 5 && current_player_name == @name2
         current_pos = 7
       else
         current_pos += 1
