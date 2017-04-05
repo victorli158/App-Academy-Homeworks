@@ -36,12 +36,18 @@ describe Dessert do
 
   describe "#mix!" do
     it "shuffles the ingredient array" do
-
+      ingredients = ["sugar", "chocolate", "milk", "flour"]
+      ingredients.each { |el| brownie.add_ingredient(el) }
+      brownie.mix!
+      expect(ingredients).to_not eq(brownie.ingredients)
+      expect(ingredients.sort).to eq(brownie.ingredients.sort)
     end
   end
 
   describe "#eat" do
     it "subtracts an amount from the quantity" do
+      brownie.eat(5)
+      expect(brownie.quantity).to eq(45)
   end
 
     it "raises an error if the amount is greater than the quantity" do
