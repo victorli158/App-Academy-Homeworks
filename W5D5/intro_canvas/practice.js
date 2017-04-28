@@ -19,6 +19,5 @@ document.addEventListener("DOMContentLoaded", function(){
   ctx.moveTo(100, 100);
   ctx.lineTo(250, 400);
   ctx.lineTo(400, 100);
-  ctx.closePath();
   ctx.stroke();
 });
