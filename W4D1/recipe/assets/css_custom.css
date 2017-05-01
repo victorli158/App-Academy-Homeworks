@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: "grey";
-  width: 900px;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -25,6 +25,7 @@ ol {
 
 header > img {
   width: 100px;
+  float: left;
 }
 
 ul li a {
@@ -33,7 +34,7 @@ ul li a {
 }
 
 nav {
-  display: inline-block;
+  float: right;
 }
 
 nav ul li {
