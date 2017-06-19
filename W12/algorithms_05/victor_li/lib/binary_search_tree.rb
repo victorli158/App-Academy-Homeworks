@@ -58,15 +58,30 @@ class BinarySearchTree
         if found == @root
           @root = @root.left
         else
-          found.left = found.parent.left
+          found.parent.left = found.left
           found.left.parent = found.parent
         end
       elsif found.right && found.left == nil
         if found == @root
           @root = @root.right
-        elsif found.parent.right == found
-          found.right = found.parent.right
+        else
+          found.parent.right = found.right
           found.right.parent = found.parent
+        end
+      else
+        max = maximum(found.left)
+        if found.parent.left == found
+          found.parent.left = max
+        else
+          found.parent.right = max
+        end
+        max.parent.right = max.left
+        found.left.parent = max
+        found.right.parent = max
+        found.left = max.left
+        found.right = max.right
+        if found == @root
+          @root = max
         end
       end
     end
@@ -82,13 +97,20 @@ class BinarySearchTree
   end
 
   def depth(tree_node = @root)
-
+    return -1 unless tree_node
+    1 + [depth(tree_node.left), depth(tree_node.right)].max
   end
 
   def is_balanced?(tree_node = @root)
+    depth(tree_node.left) == depth(tree_node.right)
   end
 
   def in_order_traversal(tree_node = @root, arr = [])
+    return [] unless tree_node
+    arr.concat(in_order_traversal(tree_node.left)) if tree_node.left
+    arr << tree_node.value
+    arr.concat(in_order_traversal(tree_node.right)) if tree_node.right
+    arr
   end
 
   private
