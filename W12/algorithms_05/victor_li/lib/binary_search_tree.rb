@@ -28,7 +28,7 @@ class BinarySearchTree
   def find(value, tree_node = @root)
     if tree_node.value == value
       return tree_node
-    elsif value <= tree_node.value
+    elsif value < tree_node.value
       if tree_node.left == nil
         return nil
       else
