@@ -6,6 +6,17 @@ class Vertex
     @in_edges = []
     @out_edges = []
   end
+
+  def destroy!
+    in_edges.each do |edge|
+      other_node = edge.from_vertex
+      other_node.out_edges.delete(self)
+    end
+    out_edges.each do |edge|
+      other_node = edge.to_vertex
+      other_node.in_edges.delete(self)
+    end
+  end
 end
 
 class Edge
