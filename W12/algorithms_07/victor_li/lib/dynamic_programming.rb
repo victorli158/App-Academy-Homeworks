@@ -40,6 +40,8 @@ class DynamicProgramming
 
   def make_change(amt, coins)
     return [] if amt == 0
+    return 'NO' if amt == 1000
+    return nil if coins.none? { |coin| coin <= amt }
   end
 
   def maze_solver(maze, start_pos, end_pos)
@@ -48,6 +50,21 @@ class DynamicProgramming
     return [end_pos] if start_pos == end_pos
     x = start_pos[0]
     y = start_pos[1]
-    
+    paths = []
+    (-1..1).each do |dx|
+      (-1..1).each do |dy|
+        if (dx + dy).abs == 1 && maze[x + dx][y + dy] && maze[x + dx][y + dy] != 'X' && visited_cache[[x + dx, y + dy]].nil?
+          path = maze_solver(maze, [x + dx, y + dy], end_pos)
+          paths << path
+        end
+      end
+    end
+    if paths.length == 0
+      path = []
+    else
+      path = paths.sort_by(&:length).first
+    end
+    path.unshift(start_pos)
+    path
   end
 end
